@@ -53,9 +53,8 @@ hystrix:
 management:
   endpoints:
     web:
-      base-path: /management
       exposure:
-        include: *
+        include: "*"
   endpoint:
     health:
       show-details: when_authorized
@@ -97,6 +96,8 @@ spring:
   application:
     name: gateway
   cloud:
+    config:
+      uri: http://localhost:8888
     gateway:
       default-filters:
         - TokenRelay
@@ -208,4 +209,3 @@ jhipster:
 # ===================================================================
 
 # application:
-
