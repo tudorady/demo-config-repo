@@ -113,7 +113,7 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: http://dev-login.simfony.rocks/auth/realms/simfonyyy
+            issuer-uri: http://dev-login.simfony.rocks/auth/realms/simfony
         registration:
           oidc:
             client-id: simfony-web
