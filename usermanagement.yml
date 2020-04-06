@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: usermanagement
+  profiles:
+    active: dev,mysql
+
+custom:
+  value: Adi a facut modificarea
