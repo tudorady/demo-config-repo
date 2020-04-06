@@ -60,6 +60,9 @@ management:
       exposure:
         include: "*"
 
+custom:
+  value: miscare
+
 logging:
   level:
     ROOT: debug
