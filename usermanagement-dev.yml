@@ -1,0 +1,103 @@
+spring:
+  application:
+    name: usermanagement
+  cloud:
+    config:
+      uri: http://simf:desdadsgb@localhost:8888
+      username: simf
+      password: desdadsgb
+  security:
+    oauth2:
+      client:
+        registration:
+          backend-integration:
+            client-id: demo
+            client-secret: 93cd4007-7265-4daf-8ca6-eb91720f6398
+            authorization-grant-type: client_credentials
+        provider:
+          backend-integration:
+            token-uri: http://dev-login.simfony.rocks/auth/realms/master/protocol/openid-connect/token
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+  resources:
+    add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  http:
+    encoding:
+      force: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/simfony?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: demo
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+server:
+  port: 8082
+
+keycloak:
+  server:
+    adminUrl: http://dev-login.simfony.rocks/auth/admin
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+custom:
+  value: miscare
+
+logging:
+  level:
+    ROOT: debug
+    org.springframework.cloud: DEBUG
+    org.springframework.security: WARN
+    com.netflix.eureka: WARN
+    com.netflix.discovery: WARN
+tenant:
+  owner:
+    cheer-iot:
+      name: "cheer-iot"
+      realm: "cheer-iot"
+    simfony:
+      name: "simfony"
+      realm: "simfony"
+application:
+  client: "http://dev-login.simfony.rocks/auth/realms/{0}"
+  authorization-url: "http://dev-login.simfony.rocks/auth/realms/{0}/protocol/openid-connect/auth"
+  token-url: "http://dev-login.simfony.rocks/auth/realms/{0}/protocol/openid-connect/token"
+  user-info-url: "http://dev-login.simfony.rocks/auth/realms/{0}/protocol/openid-connect/userinfo"
+  jwk-url: "http://dev-login.simfony.rocks/auth/realms/{0}/protocol/openid-connect/certs"
+  logout-url: "http://dev-login.simfony.rocks/auth/realms/{0}/protocol/openid-connect/logout"
+  redirect-url: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+  scope:
+    - openid
+    - address
+    - email
+    - roles
+  user-attribute-name: sub
+  end-session-conf: 'end_session_endpoint'
+  owner:
+    simfony:
+      name: "Simfony"
+      realm: "simfony"
+      client-id: "simfony-web"
+      secret: "c37a30a6-9d4d-412f-aa22-eaf1e96a73d1"
+      db-name: 'm2m'
+
